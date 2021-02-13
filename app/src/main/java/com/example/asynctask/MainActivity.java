@@ -1,7 +1,6 @@
 package com.example.asynctask;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,9 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
 
@@ -26,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
-        editText = (EditText) findViewById(R.id.editText);
+        button = findViewById(R.id.button);
+        editText = findViewById(R.id.editText);
         // устанавливаем обработчик на кнопку "Начать в потоке"
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "Делаем операцию в потоке (10с)", Toast.LENGTH_SHORT).show();
-                new LoadImage((ImageView) findViewById(R.id.image)).execute(editText.getText().toString());
+                new LoadImage(findViewById(R.id.image)).execute(editText.getText().toString());
             }
         });
     }
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             this.bmImage = bmImage;
         }
 
+        @SuppressLint("LongLogTag")
         protected Bitmap doInBackground(String... urls) {
             String urldisplay = urls[0];
             Bitmap mIcon11 = null;
